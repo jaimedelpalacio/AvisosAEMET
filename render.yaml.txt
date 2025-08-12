@@ -1,0 +1,16 @@
+# render.yaml — Despliegue automático en Render
+services:
+  - type: web                      # Servicio web (escucha HTTP)
+    name: aemet-avisos-zona        # Nombre del servicio en Render
+    env: node                      # Runtime de Node gestionado por Render
+    region: frankfurt              # UE (menor latencia desde España)
+    plan: free                     # Cambia a "starter" o "standard" si lo necesitas
+    autoDeploy: true               # Redeploy automático al hacer push a main
+    buildCommand: npm ci --omit=dev   # Instala deps (más fiable que npm i)
+    startCommand: node server.js      # Arranque (tu package.json ya define "start" también)
+    healthCheckPath: /health          # Usamos el endpoint que ya expone el microservicio
+    envVars:                          # Variables de entorno
+      - key: AEMET_API_KEY            # <<-- PON AQUÍ TU API KEY de AEMET (o usa secrets)
+        value: eyJhbGciOiJIUzI1NiJ9...gaA
+      - key: NODE_VERSION
+        value: "20"
