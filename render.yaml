@@ -5,11 +5,13 @@ services:
     region: frankfurt
     plan: free
     autoDeploy: true
+
     buildCommand: npm install --omit=dev
     startCommand: node server.js
     healthCheckPath: /health
+
     envVars:
       - key: NODE_VERSION
         value: "20"
       - key: AEMET_API_KEY
-        fromSecret: aemet-api-key   # crea este Secret en Render con tu api_key
+        value: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYWltZUBtaXNzaW9udHJhY2suY29tIiwianRpIjoiMzQ1OWE5MmYtM2RmNS00NWQwLTgyNWYtNDA4ZWNjMzcxODkxIiwiaXNzIjoiQUVNRVQiLCJpYXQiOjE3MDcwNDEwODYsInVzZXJJZCI6IjM0NTlhOTJmLTNkZjUtNDVkMC04MjVmLTQwOGVjYzM3MTg5MSIsInJvbGUiOiIifQ.Wg_hkuQdAlqVR8dbtbQgxIF5fAam1ehJ3-bDV27qgaA'
