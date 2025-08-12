@@ -1,18 +1,15 @@
-# render.yaml — Despliegue automático en Render
 services:
   - type: web
-    name: aemet-avisos-zona              # <- puedes cambiarlo si quieres
+    name: aemet-avisos-zona
     env: node
-    region: frankfurt                    # UE (baja latencia desde ES)
-    plan: free                           # cambia a starter/standard si lo necesitas
+    region: frankfurt
+    plan: free
     autoDeploy: true
-
-    buildCommand: npm install --omit=dev # <-- arregla el error por falta de package-lock.json
+    buildCommand: npm install --omit=dev
     startCommand: node server.js
     healthCheckPath: /health
-
     envVars:
       - key: NODE_VERSION
         value: "20"
-      - key: AEMET_API_KEY               # <<< más seguro vía Secret en Render
-        fromSecret: aemet-api-key
+      - key: AEMET_API_KEY
+        fromSecret: aemet-api-key   # crea este Secret en Render con tu api_key
